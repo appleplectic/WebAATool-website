@@ -6,5 +6,6 @@ export default defineConfig({
   plugins: [svelte()],
   server: {
     host: true
-  }
+  },
+  base: '/WebAATool-website/'
 })
