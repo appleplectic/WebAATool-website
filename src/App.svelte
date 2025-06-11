@@ -142,6 +142,10 @@
                     : "incomplete";
     bee_label = data["complexObjectives"]["bees"]["statusName"].replaceAll("\u0000", " ");
   }
+
+  function refreshPage() {
+    location.reload();
+  }
 </script>
 
 <style>
@@ -211,7 +215,7 @@
 </svelte:head>
 
 {#if !isConnected}
-  <h1 style="text-align: center;">Web AATool</h1>
+  <h1 style="text-align: center; cursor: pointer;">Web AATool</h1>
   <h3 style="text-align: center;">Created by Appleplectic, made possible by CTM's original AATool.</h3>
   <div class="centered" style="text-align: center; margin-top: 40px;">
     <input
@@ -236,7 +240,7 @@
 {:else}
 <main>
   <div class="centered">
-    <h1 style="text-align: center;">{heading}</h1>
+    <h1 style="text-align: center;" on:click={refreshPage}>{heading}</h1>
     <TotalProgress numCompleted={count} numTotal={total} {IGT}/>
     <div class="centered" style="font-size: 0.75em; margin-bottom: 12px;">{tracking}</div>
   </div>
