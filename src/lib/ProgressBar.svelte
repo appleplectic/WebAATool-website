@@ -21,38 +21,38 @@
     }
 
     .active-left {
-        background: url('public/progress_bar_modern/bar_modern_active_left.png') no-repeat;
+        background: url('/progress_bar_modern/bar_modern_active_left.png') no-repeat;
         width: 20px;
     }
 
     .active-middle {
-        background: url('public/progress_bar_modern/bar_modern_active_middle.png') repeat-x;
+        background: url('/progress_bar_modern/bar_modern_active_middle.png') repeat-x;
         height: 100%;
     }
 
     .active-edge {
-        background: url('public/progress_bar_modern/bar_modern_active_edge.png') no-repeat;
+        background: url('/progress_bar_modern/bar_modern_active_edge.png') no-repeat;
         width: 5px;
     }
 
     .active-right {
-        background: url('public/progress_bar_modern/bar_modern_active_right.png') no-repeat;
+        background: url('/progress_bar_modern/bar_modern_active_right.png') no-repeat;
         width: 20px;
     }
 
     .inactive-left {
-        background: url('public/progress_bar_modern/bar_modern_inactive_left.png') no-repeat;
+        background: url('/progress_bar_modern/bar_modern_inactive_left.png') no-repeat;
         width: 20px;
     }
 
     .inactive-middle {
-        background: url('public/progress_bar_modern/bar_modern_inactive_middle.png') repeat-x;
+        background: url('/progress_bar_modern/bar_modern_inactive_middle.png') repeat-x;
         height: 100%;
         flex-grow: 1;
     }
 
     .inactive-right {
-        background: url('public/progress_bar_modern/bar_modern_inactive_right.png') no-repeat;
+        background: url('/progress_bar_modern/bar_modern_inactive_right.png') no-repeat;
         width: 20px;
     }
 

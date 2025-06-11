@@ -44,7 +44,7 @@
 
 <div class="image-text-container" class:inactive={!isComplete}>
     <div class="content">
-        <img class="icon" src={"/public/criteria/" + name + ending} alt="icon" />
+        <img class="icon" src={"/criteria/" + name + ending} alt="icon" />
         <span class="icolabel">{text}</span>
     </div>
 </div>
