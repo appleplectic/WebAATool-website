@@ -27,6 +27,16 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: Optimize images
+        run: |
+          npm install -g imagemin-cli imagemin-mozjpeg imagemin-pngquant imagemin-svgo imagemin-gifsicle
+          npx imagemin dist/**/*.{png,jpg,jpeg,gif,svg} \
+            --plugin=mozjpeg \
+            --plugin=pngquant \
+            --plugin=svgo \
+            --plugin=gifsicle \
+            --out-dir=dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
