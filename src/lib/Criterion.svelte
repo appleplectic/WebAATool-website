@@ -1,4 +1,6 @@
 <script>
+    import { BASE_PATH } from './config.js';
+
     export let name = "black";
     export let text = "Black";
     export let isComplete = false;
@@ -44,7 +46,7 @@
 
 <div class="image-text-container" class:inactive={!isComplete}>
     <div class="content">
-        <img class="icon" src={"/criteria/" + name + ending} alt="icon" />
+        <img class="icon" src={BASE_PATH + "criteria/" + name + ending} alt="icon" />
         <span class="icolabel">{text}</span>
     </div>
 </div>

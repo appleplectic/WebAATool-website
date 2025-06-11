@@ -1,4 +1,6 @@
 <script>
+    import { BASE_PATH } from "./config.js";
+
     export let status = "incomplete";
     export let asset_name = "adventure.png";
     export let advancement = "Adventure";
@@ -91,7 +93,7 @@
 </style>
 
 <div class="frame-wrapper">
-    <div class="frame" style="--back-img: url('/advancement_frame_modern/{backImg}')">
+    <div class="frame" style="--back-img: url('{BASE_PATH}advancement_frame_modern/{backImg}')">
         {#if status === "incomplete"}
             <div
                     class="background-mask"
@@ -101,23 +103,23 @@
                 "
             ></div>
         {:else}
-            <img class="img-background" src="/advancement_frame_modern/{backImg}" alt="background" />
+            <img class="img-background" src="{BASE_PATH}advancement_frame_modern/{backImg}" alt="background" />
         {/if}
 
         {#if status === "incomplete"}
             <div
                     class="border-mask"
                     style="
-                --border-img: url('/advancement_frame_modern/{borderImg}');
+                --border-img: url('{BASE_PATH}advancement_frame_modern/{borderImg}');
                 -webkit-mask-image: var(--border-img);
                 mask-image: var(--border-img);
             "
             ></div>
         {:else}
-            <img class="border" src="/advancement_frame_modern/{borderImg}" alt="border" />
+            <img class="border" src="{BASE_PATH}advancement_frame_modern/{borderImg}" alt="border" />
         {/if}
 
-        <img class="icon" src="/advancements/{asset_name}" alt="advancement"/>
+        <img class="icon" src="{BASE_PATH}advancements/{asset_name}" alt="advancement"/>
     </div>
     <div class="label">{advancement}</div>
 </div>
