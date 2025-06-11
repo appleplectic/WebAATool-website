@@ -3,6 +3,8 @@
   import Advancement from "./lib/Advancement.svelte";
   import AdvancementWithCriteria from "./lib/AdvancementWithCriteria.svelte";
 
+  import { EventSourcePolyfill } from 'event-source-polyfill';
+
   let url = ""
   // url = "http://localhost:5974/sse"; // debug
   let isConnected = false;
@@ -23,7 +25,8 @@
   function connectToServer() {
     if (!url) return;
 
-    source = new EventSource(url);
+    url = url.replace(/\/$/, '');
+    source = new EventSourcePolyfill(url, {headers: {"bypass-tunnel-reminder": "e"}});
     isConnected = true;
 
     source.onmessage = async event => {
