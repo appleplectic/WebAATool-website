@@ -263,7 +263,7 @@
       <div class="advancement-section">
         <div class="split">Midgame</div>
         <div class="advancement-grid">
-          {#each nocriteria.slice(35, 55) as pair}
+          {#each nocriteria.slice(35, 59) as pair}
             <Advancement
                     status={pair.value["isComplete"] ? "complete" : pair.value["isPartial"] ? "partial" : "incomplete"}
                     advancement={pair.value["statusName"]}
@@ -276,7 +276,7 @@
       <div class="advancement-section">
         <div class="split">Endgame</div>
         <div class="advancement-grid">
-          {#each nocriteria.slice(55, 74) as pair}
+          {#each nocriteria.slice(59, 74) as pair}
             <Advancement
                     status={pair.value["isComplete"] ? "complete" : pair.value["isPartial"] ? "partial" : "incomplete"}
                     advancement={pair.value["statusName"]}
