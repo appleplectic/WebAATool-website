@@ -6,7 +6,7 @@
   import { EventSourcePolyfill } from 'event-source-polyfill';
 
   let url = ""
-  // url = "http://localhost:5974/sse"; // debug
+  // url = "http://localhost:5974/"; // debug
   let isConnected = false;
 
   let source;
@@ -215,12 +215,12 @@
 </svelte:head>
 
 {#if !isConnected}
-  <h1 style="text-align: center; cursor: pointer;">Web AATool</h1>
+  <h1 style="text-align: center;">Web AATool</h1>
   <h3 style="text-align: center;">Created by Appleplectic, made possible by CTM's original AATool.</h3>
   <div class="centered" style="text-align: center; margin-top: 40px;">
     <input
       type="text"
-      placeholder="Enter server URL (http://example.com/sse)"
+      placeholder="Enter server URL (http://example.com/)"
       bind:value={url}
       style="font-family: Minecraft; padding: 8px; font-size: 0.9em; width: 320px; border: 1px solid #ccc; border-radius: 6px;"
     />
@@ -240,7 +240,7 @@
 {:else}
 <main>
   <div class="centered">
-    <h1 style="text-align: center;" on:click={refreshPage}>{heading}</h1>
+    <h1 style="text-align: center; cursor: pointer;" on:click={refreshPage}>{heading}</h1>
     <TotalProgress numCompleted={count} numTotal={total} {IGT}/>
     <div class="centered" style="font-size: 0.75em; margin-bottom: 12px;">{tracking}</div>
   </div>
