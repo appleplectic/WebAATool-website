@@ -92,13 +92,15 @@
 
   $: heading = data
           ? (username === ""
-                  ? `${data["category"]} Tracker`
+                  ? `${data["version"]} ${data["category"]} Tracker`
                   : `${username}'s ${data["version"]} ${data["category"]} Progress`)
           : "All Advancements Tracker";
 
-  $: title = username === ""
-          ? "Web AATool"
-          : `${count}/${total} | ${IGT} IGT | ${username}`;
+  $: title = data
+          ? (username === ""
+              ? `${count}/${total} | ${IGT} IGT`
+              : `${count}/${total} | ${IGT} IGT | ${username}`)
+        : "Web AATool";
 
   let notch_apple_status, netherite_status, trident_status, shell_status, skull_status, beacon_status, bee_status = "incomplete";
   let notch_apple_label = "Obtain God Apple";
