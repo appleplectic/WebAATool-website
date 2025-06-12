@@ -156,7 +156,8 @@
   }
 
   function refreshPage() {
-    location.reload();
+    const url = window.location.origin + window.location.pathname;
+    window.location.href = url;
   }
 </script>
 
