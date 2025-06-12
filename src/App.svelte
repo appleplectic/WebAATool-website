@@ -3,6 +3,7 @@
   import Advancement from "./lib/Advancement.svelte";
   import AdvancementWithCriteria from "./lib/AdvancementWithCriteria.svelte";
 
+  import { onMount } from 'svelte';
   import { EventSourcePolyfill } from 'event-source-polyfill';
 
   let url = ""
@@ -12,6 +13,15 @@
   let source;
   let data;
   // connectToServer(); // debug
+
+  onMount(() => {
+    const params = new URLSearchParams(window.location.search);
+    const serverParam = params.get('server');
+    if (serverParam) {
+      url = serverParam;
+      connectToServer();
+    }
+  });
 
   function clean(str) {
     return str.replace(/\u0000/g, ' ')
