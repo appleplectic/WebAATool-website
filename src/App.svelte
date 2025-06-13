@@ -3,16 +3,14 @@
   import Advancement from "./lib/Advancement.svelte";
   import AdvancementWithCriteria from "./lib/AdvancementWithCriteria.svelte";
 
-  import { onMount } from 'svelte';
+  import {onDestroy, onMount} from 'svelte';
   import { EventSourcePolyfill } from 'event-source-polyfill';
 
   let url = ""
-  // url = "http://localhost:5974/"; // debug
   let isConnected = false;
 
   let source;
   let data;
-  // connectToServer(); // debug
 
   onMount(() => {
     const params = new URLSearchParams(window.location.search);
@@ -23,6 +21,11 @@
     }
   });
 
+  onDestroy(() => {
+    if (source) source.close();
+  });
+
+
   function clean(str) {
     return str.replace(/\u0000/g, ' ')
             .replace(/\uFFFD/g, ' ')
@@ -32,16 +35,23 @@
             .replace(/[\u200B-\u200D\uFEFF]/g, '');
   }
 
-  function connectToServer() {
+  async function connectToServer() {
     if (!url) return;
 
     url = url.replace(/\/$/, '');
-    source = new EventSourcePolyfill(url, {headers: {"bypass-tunnel-reminder": "e"}});
+
+    source = new EventSourcePolyfill(url, {
+      headers: { "bypass-tunnel-reminder": "e" }
+    });
     isConnected = true;
 
     source.onmessage = async event => {
-      const cleaned = clean(event.data)
+      const cleaned = clean(event.data);
       data = JSON.parse(cleaned);
+    };
+
+    source.onerror = (err) => {
+      console.error(err);
     };
   }
 
