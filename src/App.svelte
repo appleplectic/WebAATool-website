@@ -303,7 +303,7 @@
 {:else}
   <main>
     <div class="centered">
-      <a href="/" style="text-decoration:none; color:inherit;" on:click={refreshPage}>
+      <a href={BASE_PATH} style="text-decoration:none; color:inherit;" on:click={refreshPage}>
         <h1 style="text-align: center; cursor: pointer;">{heading}</h1>
       </a>
       <TotalProgress numCompleted={count} numTotal={total} {IGT}/>
