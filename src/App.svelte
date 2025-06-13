@@ -3,11 +3,12 @@
   import Advancement from "./lib/Advancement.svelte";
   import AdvancementWithCriteria from "./lib/AdvancementWithCriteria.svelte";
 
-  import {onDestroy, onMount} from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { EventSourcePolyfill } from 'event-source-polyfill';
 
-  let url = ""
+  let url = "";
   let isConnected = false;
+  let connectionError = "";
 
   let source;
   let data;
@@ -22,7 +23,7 @@
   });
 
   onDestroy(() => {
-    if (source) source.close();
+    disconnect();
   });
 
 
@@ -34,24 +35,58 @@
             .replace(/\uFEFF/g, ' ')
             .replace(/[\u200B-\u200D\uFEFF]/g, '');
   }
+  function disconnect() {
+    if (source) {
+      source.close();
+      source = undefined;
+    }
+    isConnected = false;
+  }
+
+  async function validateEndpoint(endpoint) {
+    try {
+      const resp = await fetch(endpoint, {
+        headers: { 'bypass-tunnel-reminder': 'e' }
+      });
+      const text = await resp.text();
+      JSON.parse(clean(text));
+      return true;
+    } catch (err) {
+      console.error('Failed to validate endpoint', err);
+      return false;
+    }
+  }
 
   async function connectToServer() {
     if (!url) return;
 
-    url = url.replace(/\/$/, '');
+    const endpoint = url.replace(/\/$/, '');
+    if (!(await validateEndpoint(endpoint))) {
+      connectionError = 'Provided URL did not return valid JSON.';
+      disconnect();
+      return;
+    }
 
-    source = new EventSourcePolyfill(url, {
-      headers: { "bypass-tunnel-reminder": "e" }
+    connectionError = '';
+    source = new EventSourcePolyfill(endpoint, {
+      headers: { 'bypass-tunnel-reminder': 'e' }
     });
-    isConnected = true;
 
-    source.onmessage = async event => {
-      const cleaned = clean(event.data);
-      data = JSON.parse(cleaned);
+    source.onmessage = event => {
+      try {
+        const cleaned = clean(event.data);
+        data = JSON.parse(cleaned);
+        if (!isConnected) {
+          isConnected = true;
+        }
+      } catch (err) {
+        console.error('Failed to parse event data', err);
+      }
     };
 
-    source.onerror = (err) => {
-      console.error(err);
+    source.onerror = err => {
+      console.error('SSE connection error', err);
+      disconnect();
     };
   }
 
@@ -259,6 +294,9 @@
     >
       Sample
     </button>
+    {#if connectionError}
+      <div style="color: red; margin-top: 8px;">{connectionError}</div>
+    {/if}
   </div>
 {:else}
 <main>
