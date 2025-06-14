@@ -45,6 +45,11 @@
 
   async function connectToServer() {
     connecting = true;
+
+    if (source) {
+      source.close();
+    }
+
     if (!url) return;
 
     url = url.replace(/\/$/, '');
@@ -149,43 +154,43 @@
       : data["complexObjectives"]["egap"]["isPartial"]
         ? "incomplete" // partial not working
         : "incomplete";
-    notch_apple_label = data["complexObjectives"]["egap"]["statusName"].replace("\u0000", " ");
+    notch_apple_label = clean(data["complexObjectives"]["egap"]["statusName"]);
     netherite_status = data["complexObjectives"]["netherite"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["netherite"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    netherite_label = data["complexObjectives"]["netherite"]["statusName"].replaceAll(":", ": ");
+    netherite_label = clean(data["complexObjectives"]["netherite"]["statusName"]);
     trident_status = data["complexObjectives"]["trident"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["trident"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    trident_label = data["complexObjectives"]["trident"]["statusName"];
+    trident_label = clean(data["complexObjectives"]["trident"]["statusName"]);
     shell_status = data["complexObjectives"]["nautilusshells"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["nautilusshells"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    shell_label = data["complexObjectives"]["nautilusshells"]["statusName"].replaceAll("\u0000", " ");
+    shell_label = clean(data["complexObjectives"]["nautilusshells"]["statusName"]);
     skull_status = data["complexObjectives"]["witherskulls"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["witherskulls"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    skull_label = data["complexObjectives"]["witherskulls"]["statusName"].replaceAll("\u0000", " ");
+    skull_label = clean(data["complexObjectives"]["witherskulls"]["statusName"]);
     beacon_status = data["complexObjectives"]["goldblocks"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["goldblocks"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    beacon_label = data["complexObjectives"]["goldblocks"]["statusName"].replaceAll("\u0000", " ");
+    beacon_label = clean(data["complexObjectives"]["goldblocks"]["statusName"]);
     bee_status = data["complexObjectives"]["bees"]["isComplete"]
       ? "complete"
       : data["complexObjectives"]["bees"]["isPartial"]
         ? "incomplete"
         : "incomplete";
-    bee_label = data["complexObjectives"]["bees"]["statusName"].replaceAll("\u0000", " ");
+    bee_label = clean(data["complexObjectives"]["bees"]["statusName"]);
   }
 </script>
 
