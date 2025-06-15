@@ -137,7 +137,7 @@
     ? (username === ""
       ? `${count}/${total} | ${IGT} IGT`
       : `${count}/${total} | ${IGT} IGT | ${username}`)
-    : "Web AATool";
+    : "WebAATool";
 
   let notch_apple_status, netherite_status, trident_status,
     shell_status, skull_status, beacon_status, bee_status = "incomplete";
@@ -288,9 +288,10 @@
 </svelte:head>
 
 {#if !isConnected}
-  <h1 style="text-align: center;">Web AATool</h1>
+  <h1 style="text-align: center;">WebAATool</h1>
   <h3 style="text-align: center;">Created by Appleplectic, made possible by CTM's original AATool.</h3>
-  <div class="centered" style="text-align: center; margin-top: 40px;">
+  <h3 style="text-align: center;">For players, <a href="https://github.com/appleplectic/WebAATool">download the server</a> to use.</h3>
+  <div class="centered" style="text-align: center; margin-top: 25px;">
     <input
       type="text"
       placeholder="Enter server URL (https://example.com/)"
